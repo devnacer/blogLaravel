@@ -11,8 +11,9 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {    
+        $categories = Category::paginate(4);
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -28,7 +29,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
