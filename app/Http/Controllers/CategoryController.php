@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {    
-        $categories = Category::paginate(4);
+        $categories = Category::latest()->paginate(4);
         return view('category.index', compact('categories'));
     }
 
@@ -27,9 +28,15 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        dd($request);
+        $formFields = $request->validated();
+
+        Category::create($formFields);
+
+        return redirect()->route('category.index')->with('success', '
+        la categorié '.$request->name.' a bien été crée !!');
+
     }
 
     /**
@@ -45,15 +52,20 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $formFields = $request->validated();
+        $category->fill($formFields)->save();
+    
+        return redirect()->route('category.index')->with('success', '
+        la categorié a bien été modifiée !!');
+
     }
 
     /**
@@ -61,6 +73,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return to_route('category.index')->with('success', 'La categorié '.$category->name.' a bien été supprimée');
     }
 }
