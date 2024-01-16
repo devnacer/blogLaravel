@@ -34,8 +34,8 @@ class CategoryController extends Controller
 
         Category::create($formFields);
 
-        return redirect()->route('category.index')->with('success', '
-        la categorié '.$request->name.' a bien été crée !!');
+        return redirect()->route('category.index')->with('success', 'La catégorie "'.$request->name.'" a bien été créée !');
+
 
     }
 
@@ -63,8 +63,8 @@ class CategoryController extends Controller
         $formFields = $request->validated();
         $category->fill($formFields)->save();
     
-        return redirect()->route('category.index')->with('success', '
-        la categorié a bien été modifiée !!');
+        return redirect()->route('category.index')->with('success', 'La catégorie a bien été modifiée !');
+
 
     }
 
@@ -74,6 +74,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return to_route('category.index')->with('success', 'La categorié '.$category->name.' a bien été supprimée');
+        return redirect()->route('category.index')->with('success', 'La catégorie "'.$category->name.'" a bien été supprimée');
     }
+    
 }

@@ -10,10 +10,24 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
-
+           
+          {{-- profil --}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Catégories
+              Admin
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('profil.index')}}">Voir tous les admins</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ route('profil.create')}}">Ajouter un admin</a></li>
+            </ul>
+          </li>
+          {{-- end_profil --}}
+           
+          {{-- category --}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Catégories
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{ route('category.index')}}">Voir toutes mes catégories</a></li>
@@ -21,6 +35,7 @@
               <li><a class="dropdown-item" href="{{ route('category.create')}}">Créer une Catégorie</a></li>
             </ul>
           </li>
+          {{-- end_category --}}
 
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
