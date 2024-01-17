@@ -1,17 +1,17 @@
 @section('title33')
-    Ajouter un admin
+    Ajouter un article
 @endsection
 
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Ajouter un admin</h2>
+    <h2>Ajouter un article</h2>
 
     <form action="{{ route('profil.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
-            <label for="name" class="form-label mt-4">Nom</label>
+            <label for="title" class="form-label mt-4">Titre</label>
             <input type="text" class="form-control" id="ProfilName" name="name"
                 placeholder="Entrez le nom de l'administrateur" value="{{ old('name') }}" required>
             @error('name')

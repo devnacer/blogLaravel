@@ -24,6 +24,19 @@
           </li>
           {{-- end_profil --}}
            
+          {{-- article --}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Article
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('article.index')}}">Voir tous les articles</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ route('article.create')}}">Ajouter un article</a></li>
+            </ul>
+          </li>
+          {{-- end_article --}}
+           
           {{-- category --}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,7 +45,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{{ route('category.index')}}">Voir toutes mes catégories</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="{{ route('category.create')}}">Créer une Catégorie</a></li>
+              <li><a class="dropdown-item" href="{{ route('category.create')}}">Ajouter une Catégorie</a></li>
             </ul>
           </li>
           {{-- end_category --}}

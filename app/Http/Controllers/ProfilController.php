@@ -59,9 +59,13 @@ class ProfilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profil $profil)
+    public function update(ProfilRequest $request, Profil $profil)
     {
-        //
+        $formFields = $request->validated();
+        $formFields['password'] = Hash::make($request->password);
+        $profil->fill($formFields)->save();
+
+        return redirect()->route('profil.index')->with('success', "L'administrateur a bien été modifié");
     }
 
     /**
