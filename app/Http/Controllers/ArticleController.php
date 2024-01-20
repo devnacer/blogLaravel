@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\articleResquest;
 
 class ArticleController extends Controller
 {
@@ -20,15 +23,31 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('article.create');
+        $categories = Category::all();
+        return view('article.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(articleResquest $request)
     {
-        //
+        $formFields = $request->validated();
+
+        // image
+        if ($request->hasFile('image')) {
+
+            $formFields['image'] = $request->file('image')->store('article', 'public');
+        }
+
+        $formFields['profil_id'] = Auth::id();
+
+        //insertion
+        Article::create($formFields);
+        
+        dd($formFields);
+
+        return redirect()->route('article.index')->with('success', "L'article " . $formFields['title'] . " a bien été ajouté");
     }
 
     /**

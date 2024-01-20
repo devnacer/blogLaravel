@@ -17,6 +17,9 @@ class Article extends Model
         'image',
         'profil_id',
         'category_id',
-     
     ];
+
+    public function getImageAttribute($value){
+        return $value??'article/articleNoImage.png';
+    }
 }
