@@ -17,4 +17,6 @@ class Profil extends Model
         'role',
         'password',
     ];
+
+
 }

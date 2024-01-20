@@ -52,11 +52,6 @@
             @enderror
         </div>
 
-
-
-
-
-
         <button type="submit" name="create" class="btn btn-primary mt-4 mb-4">Ajouter un article</button>
 
     </form>

@@ -15,7 +15,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::latest()->paginate(4);
+        return view('article.index', compact('articles'));
     }
 
     /**
@@ -53,7 +54,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('article.show', compact('article'));
     }
 
     /**
@@ -77,6 +78,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('article.index')->with('success', "L'article «" . $article->title . "» a bien été supprimé");
+        
     }
 }
