@@ -15,7 +15,7 @@
 </style>
 
 @section('title33')
-    Sign in
+    Se connecter
 @endsection
 
 @extends('layouts.master')
@@ -23,20 +23,23 @@
 @section('section12')
     <form method="POST" action="{{ route('login') }}" class="form-signin">
         @csrf
-        <h1 class="h3 my-3 fw-normal">Sign in</h1>
+        
+        <h2 class="h3 my-3 fw-normal">Connexion</h2>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" name="login" value="{{old('login')}}">
-            <label for="floatingInput">Email address</label>
+            <input type="email" class="form-control" id="floatingInput" name="login" value="{{ old('login') }}">
+            <label for="floatingInput">Adresse e-mail</label>
             @error('login')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
-        <div class="form-floating">
+
+        <div class="form-floating my-2">
             <input type="password" class="form-control" id="floatingPassword" name="password">
-            <label for="floatingPassword">Password</label>
+            <label for="floatingPassword">Mot de passe</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Se connecter</button>
+
     </form>
 @endsection

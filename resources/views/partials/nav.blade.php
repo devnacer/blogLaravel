@@ -49,6 +49,19 @@
             </ul>
           </li>
           {{-- end_category --}}
+           
+          {{-- login --}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Déconnexion
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('login.show')}}">Connexion</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{{ route('logout')}}">Déconnexion</a></li>
+            </ul>
+          </li>
+          {{-- end_login --}}
 
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
