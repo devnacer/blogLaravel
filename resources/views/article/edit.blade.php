@@ -1,13 +1,13 @@
 @section('title33')
-    Ajouter un article
+    Modification de l'article {{$article->title}}
 @endsection
 
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Ajouter un article</h2>
+    <h2>Modification de l'article: <strong>{{$article->title}}</strong></h2>
 
-    <form action="{{ route('article.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -31,18 +31,22 @@
 
         <div class="form-group">
             <label for="inputImage" class="form-label mt-4">Image</label>
-            <input type="file" name="image" class="form-control">
+            <input type="file" name="image" class="form-control" value="{{ old('image', $article->image) }}">
 
             @error('content')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
+        <div class="form-group">
+            <img class="w-25 mt-4" src="{{ asset('storage/'.$article->image)}}" alt="">
+        </div>
+
 
         <div class="form-group">
             <label for="category" class="form-label mt-4">Catégorie</label>
             <select class="form-select" name="category_id" aria-label="Sélectionnez une catégorie">
-                <option selected disabled>Ouvrir le menu de sélection</option>
+                <option value="{{ $article->category->id }}" selected>{{$article->category->name}}</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -53,7 +57,7 @@
             @enderror
         </div>
 
-        <button type="submit" name="update" class="btn btn-primary mt-4 mb-4">Ajouter un article</button>
+        <button type="submit" name="update" class="btn btn-primary mt-4 mb-4">Modifier</button>
 
     </form>
 @endsection

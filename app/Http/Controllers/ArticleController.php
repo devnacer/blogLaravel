@@ -62,15 +62,31 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $categories = Category::all();
+        return view('article.edit', compact('article','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(articleResquest $request, Article $article)
     {
-        //
+        $formFields = $request->validated();
+
+        // image
+        if ($request->hasFile('image')) {
+
+            $formFields['image'] = $request->file('image')->store('article', 'public');
+        }else{
+            $formFields['image'] = $article->image;
+        }
+
+        $formFields['profil_id'] = Auth::id();
+
+        //insertion
+        $article->fill($formFields)->save();
+        
+        return redirect()->route('article.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été modifié.');
     }
 
     /**
