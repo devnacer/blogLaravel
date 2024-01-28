@@ -32,6 +32,7 @@ class Article extends Model
 
     public function profil()
     {
-        return $this->belongsTo(Profil::class);
+        return $this->belongsTo(Profil::class, 'profil_id');
     }
+
 }

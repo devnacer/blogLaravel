@@ -5,7 +5,7 @@
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Modifier l'administrateur  {{ $profil->name }}</h2>
+    <h2>Modifier {{ $profil->name }}</h2>
 
 
     <form method="POST" action="{{ route('profil.update', $profil->id) }}">

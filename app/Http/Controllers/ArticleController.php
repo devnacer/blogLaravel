@@ -10,6 +10,10 @@ use App\Http\Requests\articleResquest;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -45,7 +49,7 @@ class ArticleController extends Controller
 
         //insertion
         Article::create($formFields);
-        
+
         return redirect()->route('category.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été ajouté.');
     }
 
@@ -63,7 +67,7 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $categories = Category::all();
-        return view('article.edit', compact('article','categories'));
+        return view('article.edit', compact('article', 'categories'));
     }
 
     /**
@@ -77,7 +81,7 @@ class ArticleController extends Controller
         if ($request->hasFile('image')) {
 
             $formFields['image'] = $request->file('image')->store('article', 'public');
-        }else{
+        } else {
             $formFields['image'] = $article->image;
         }
 
@@ -85,7 +89,7 @@ class ArticleController extends Controller
 
         //insertion
         $article->fill($formFields)->save();
-        
+
         return redirect()->route('article.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été modifié.');
     }
 
@@ -96,6 +100,14 @@ class ArticleController extends Controller
     {
         $article->delete();
         return redirect()->route('article.index')->with('success', "L'article «" . $article->title . "» a bien été supprimé");
-        
+    }
+
+    // ArticlesController.php
+    public function indexArticlesProfil()
+    {
+         $id = Auth::id();
+         $articles = Article::where('profil_id', $id)->latest()->paginate(2);
+
+        return view('article.indexArticlesProfil', compact('articles'));
     }
 }

@@ -7,14 +7,13 @@
 @section('section12')
     <h2>Ajouter un article</h2>
 
-    <form action="{{ route('article.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
 
         <div class="form-group">
             <label for="title" class="form-label mt-4">Titre</label>
             <input type="text" class="form-control" id="articleTitle" name="title"
-                placeholder="Entrez le titre de l'article" value="{{ old('title', $article->title) }}" required>
+                placeholder="Entrez le titre de l'article" value="{{ old('title') }}" required>
             @error('title')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -23,7 +22,7 @@
         <div class="form-group">
             <label for="content" class="form-label mt-4">Contenu</label>
             <textarea type="text" class="form-control" id="articleContent" name="content"
-                placeholder="Entrez le contenu de l'article" required>{{ old('content', $article->content) }}</textarea>
+                placeholder="Entrez le contenu de l'article" required>{{ old('content') }}</textarea>
             @error('content')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -53,7 +52,7 @@
             @enderror
         </div>
 
-        <button type="submit" name="update" class="btn btn-primary mt-4 mb-4">Ajouter un article</button>
+        <button type="submit" name="create" class="btn btn-primary mt-4 mb-4">Ajouter un article</button>
 
     </form>
 @endsection

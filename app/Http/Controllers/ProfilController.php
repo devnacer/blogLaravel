@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,8 +26,10 @@ class ProfilController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Profil $profil)
     {
+        $this->authorize('create', $profil);
+
         return view('profil.create');
     }
 
@@ -45,7 +51,7 @@ class ProfilController extends Controller
      */
     public function show(Profil $profil)
     {
-        //
+        return view('profil.show', compact('profil'));
     }
 
     /**

@@ -1,11 +1,11 @@
 @section('title33')
-    Tous les articles
+    Tous mes articles
 @endsection
 
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Tous les articles</h2>
+    <h2>Tous mes articles</h2>
 
     @include('partials.alert')
 
@@ -14,15 +14,16 @@
         <table class="table">
             <thead>
                 <tr>
-                    <tr>
-                        <th scope="col">#ID</th>
-                        <th scope="col">Titre</th>
-                        <th scope="col">Catégorie</th>
-                        <th scope="col">Publié par</th>
-                        <th scope="col">Créé le</th>
-                    </tr>
-                    
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Publié par</th>
+                    <th scope="col">Créé le</th>
+                </tr>
+
             </thead>
+
             <tbody>
                 @foreach ($articles as $article)
                     <tr>
@@ -32,10 +33,8 @@
                         <td>{{ $article->profil->name }}</td>
                         <td>{{ $article->created_at }}</td>
                         <td class="d-flex">
-                        
+
                             <a href="{{ route('article.show', $article->id) }}" class="btn-sm btn-info float-end">Voir</a>
-                            
-                            @can('update', $article)
 
                             <form action="{{ route('article.destroy', $article->id) }}" method="POST">
                                 @csrf
@@ -49,8 +48,6 @@
                                 <button class="btn-sm btn-primary float-end">Modifier</button>
                             </form>
 
-                            @endcan
-                            
                         </td>
                     </tr>
                 @endforeach

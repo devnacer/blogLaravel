@@ -20,9 +20,10 @@ use App\Http\Controllers\LoginController;
 Route::resource('category', CategoryController::class);
 Route::resource('profil', ProfilController::class);
 Route::resource('article', ArticleController::class);
+Route::get('/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
 
 // login
-Route::get('/login', [LoginController::class, 'show'])->name('login.show');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/login', [LoginController::class, 'show'])->name('login.show')->middleware('guest');
+Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 

@@ -1,5 +1,5 @@
 @section('title33')
-Tous les Profils
+    Tous les Profils
 @endsection
 
 @extends('layouts.master')
@@ -29,19 +29,21 @@ Tous les Profils
                         <td>{{ $profil->role }}</td>
                         <td>{{ $profil->email }}</td>
                         <td>{{ $profil->created_at }}</td>
-                        <td class="d-flex">
-                            <form action="{{ route('profil.destroy', $profil->id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button onclick="return confirm('Voulez-vous vraiment supprimer cette personne ?');"
-                                    class="btn-sm btn-danger float-end mx-2">Supprimer</button>
-                            </form>
+                        @can('superAdmin', $profil)
+                            <td class="d-flex">
+                                <form action="{{ route('profil.destroy', $profil->id) }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button onclick="return confirm('Voulez-vous vraiment supprimer cette personne ?');"
+                                        class="btn-sm btn-danger float-end mx-1">Supprimer</button>
+                                </form>
 
-                            <form action="{{ route('profil.edit', $profil->id) }}" method="GET">
-                                @csrf
-                                <button class="btn-sm btn-primary float-end mx-2">Modifier</button>
-                            </form>
-                        </td>
+                                <form action="{{ route('profil.edit', $profil->id) }}" method="GET">
+                                    @csrf
+                                    <button class="btn-sm btn-primary float-end">Modifier</button>
+                                </form>
+                            </td>
+                        @endcan
                     </tr>
                 @endforeach
             </tbody>
