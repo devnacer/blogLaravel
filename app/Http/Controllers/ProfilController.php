@@ -51,7 +51,7 @@ class ProfilController extends Controller
      */
     public function show(Profil $profil)
     {
-        return view('profil.show', compact('profil'));
+        //
     }
 
     /**
@@ -67,6 +67,8 @@ class ProfilController extends Controller
      */
     public function update(ProfilRequest $request, Profil $profil)
     {
+        $this->authorize('update', $profil);
+
         $formFields = $request->validated();
         $formFields['password'] = Hash::make($request->password);
         $profil->fill($formFields)->save();

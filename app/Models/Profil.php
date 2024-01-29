@@ -23,5 +23,10 @@ class Profil extends Model
         'remember_token',
     ];
 
+    public function trashed()
+    {
+        return is_null($this->deleted_at);
+    }
+
 
 }

@@ -12,9 +12,10 @@ class ProfilPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(GenericUser $profil): bool
     {
-        //
+        return $profil->role === "superAdmin";
+
     }
 
     /**
@@ -30,13 +31,17 @@ class ProfilPolicy
      */
     public function create(GenericUser $profil): bool
     {
+        return $profil->role === "superAdmin";
+
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, profils $profils): bool
+    public function update(GenericUser $profil): bool
     { //
+        return $profil->role === "superAdmin";
+
     }
 
     /**
@@ -63,10 +68,5 @@ class ProfilPolicy
         //
     }
      
-    // super admin policy
-    public function superAdmin(GenericUser $profil): bool
-    {
-        return $profil->role === "superAdmin";
-    }
 }
        

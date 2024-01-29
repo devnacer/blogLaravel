@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,16 +14,17 @@ class LoginController extends Controller
         return view('login.show');
     }
 
-    public function login(Request $request)
+    public function login(Request $request, Profil $profil)
     {
         $email = $request->login;
         $password = $request->password;
         $credentials = [
             'email' => $email,
             'password' => $password,
+            'deleted_at' => null,
         ];
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)  && $profil->trashed()) {
             $request->session()->regenerate();
             return redirect()->route('category.index')->with([
                 'success' => 'Vous êtes bien connecté ' . $email,

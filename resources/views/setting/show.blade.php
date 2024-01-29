@@ -17,7 +17,15 @@ Paramètre
             <form action="{{ route('profil.edit', $profil->id) }}" method="GET">
                 @csrf
                 <button class="btn-sm btn-primary float-end">Modifier mon profil</button>
+            </form> 
+
+            <form action="{{ route('setting.destroy', $profil->id) }}" method="POST">
+                @csrf
+                @method('delete')
+                <button onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?');"
+                    class="btn-sm btn-danger float-end mx-1">Supprimer mon profil</button>
             </form>
+
         </div>
 
         <div class="card-body">

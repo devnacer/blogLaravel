@@ -24,12 +24,14 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('profil.index') }}">Voir tous les admins</a></li>
 
-                            @can('superAdmin', Auth::user())
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="{{ route('profil.create') }}">Ajouter un admin</a></li>
-                            @endcan
+                      @can('create', App\Models\Profil::class)
+                      <li>
+                          <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="{{ route('profil.create') }}">Ajouter un admin</a></li>
+                          
+                      @endcan
+
                         </ul>
                     </li>
                     {{-- end_profil --}}
@@ -38,7 +40,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Article
+                            Article  
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
@@ -85,7 +87,8 @@
                             {{ Auth::user()->email }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profil.show', Auth::user()->id) }}">Paramètre</a></li>
+                            <li><a class="dropdown-item" href="{{ route('setting.show', Auth::user()->id) }}">Paramètre</a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

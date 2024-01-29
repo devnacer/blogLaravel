@@ -29,7 +29,7 @@
                         <td>{{ $profil->role }}</td>
                         <td>{{ $profil->email }}</td>
                         <td>{{ $profil->created_at }}</td>
-                        @can('superAdmin', $profil)
+                        @can('viewAny', $profil)
                             <td class="d-flex">
                                 <form action="{{ route('profil.destroy', $profil->id) }}" method="POST">
                                     @csrf
