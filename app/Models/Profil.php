@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Article;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Profil extends Model
 {
@@ -28,5 +29,8 @@ class Profil extends Model
         return is_null($this->deleted_at);
     }
 
-
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'profil_id', 'id');
+    }
 }

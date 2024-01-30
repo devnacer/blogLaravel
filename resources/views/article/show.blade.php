@@ -27,11 +27,11 @@
             </form>
         </div>
 
-        <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="...">
+        <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top w-25" alt="...">
         <div class="card-body">
             <h5 class="card-title"><strong>{{ $article->title }}</strong></h5>
             <hr>
-            <p class="card-text">{{ $article->content }}</p>
+            <div class="container">{!! $article->content !!}</div>
             <hr>
             <p class="card-text"><strong>Publié par :</strong> {{ $article->profil->name }}</p>
             <hr>

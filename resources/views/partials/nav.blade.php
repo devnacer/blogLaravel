@@ -12,7 +12,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{{ route('profil.home')}}">Accueil</a>
                     </li>
 
                     {{-- profil --}}
@@ -76,9 +76,9 @@
                     </li>
                     {{-- end_category --}}
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                    </li> --}}
 
                     {{-- login --}}
                     <li class="nav-item dropdown">

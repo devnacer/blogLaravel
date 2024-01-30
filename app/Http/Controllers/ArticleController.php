@@ -50,7 +50,7 @@ class ArticleController extends Controller
         //insertion
         Article::create($formFields);
 
-        return redirect()->route('category.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été ajouté.');
+        return redirect()->route('article.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été ajouté.');
     }
 
     /**

@@ -18,13 +18,14 @@ use App\Http\Controllers\SettingController;
 |
 */
 
-Route::resource('category', CategoryController::class);
-Route::resource('profil', ProfilController::class);
-Route::resource('article', ArticleController::class);
-Route::get('/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
+Route::resource('admin/category', CategoryController::class);
+Route::resource('admin/profil', ProfilController::class);
+Route::resource('admin/article', ArticleController::class);
+Route::get('admin/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
+Route::get('admin/home', [ProfilController::class, 'home'])->name('profil.home');
 
-Route::get('/setting/{profil}', [SettingController::class, 'show'])->name('setting.show');
-Route::delete('/setting/{profil}', [SettingController::class, 'destroy'])->name('setting.destroy');
+Route::get('admin/setting/{profil}', [SettingController::class, 'show'])->name('setting.show');
+Route::delete('admin/setting/{profil}', [SettingController::class, 'destroy'])->name('setting.destroy');
 
 // login
 Route::get('/login', [LoginController::class, 'show'])->name('login.show')->middleware('guest');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profil;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProfilRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
@@ -84,6 +85,14 @@ class ProfilController extends Controller
         $profil->delete();
         return redirect()->route('profil.index')->with('success', "L'administrateur ".$profil->name.' a bien été supprimé.');
     }
+
+    public function home(Profil $profil)
+    {
+        $latestArticles = $profil->articles()->get();
+        dd($latestArticles);
+        return view('profil.home', compact('latestArticles'));
+    }
     
+
     
 }

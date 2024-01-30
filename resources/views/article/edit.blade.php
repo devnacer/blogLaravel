@@ -1,3 +1,5 @@
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
 @section('title33')
     Modification de l'article {{$article->title}}
 @endsection
@@ -21,9 +23,8 @@
         </div>
 
         <div class="form-group">
-            <label for="content" class="form-label mt-4">Contenu</label>
-            <textarea type="text" class="form-control" id="articleContent" name="content"
-                placeholder="Entrez le contenu de l'article" required>{{ old('content', $article->content) }}</textarea>
+            <label  class="form-label mt-4">Contenu</label>
+            <textarea  id="content" name="content">{{ old('content', $article->content) }}</textarea>
             @error('content')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -58,6 +59,14 @@
         </div>
 
         <button type="submit" name="update" class="btn btn-primary mt-4 mb-4">Modifier</button>
+
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#content' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
 
     </form>
 @endsection
