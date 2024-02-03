@@ -20,10 +20,9 @@ class ProfilFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->email(),
-            'role' => fake()->text(12),
+            // 'role' => fake()->text(12),
+            'role' => fake()->randomElement(['admin', 'superAdmin']),
             'password' => Hash::make('password'),
-
-
         ];
     }
 }

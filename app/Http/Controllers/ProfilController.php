@@ -12,7 +12,7 @@ class ProfilController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+          $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class ProfilController extends Controller
     {
         $profils = Profil::latest()->paginate(4);
 
-        return view('profil/index', compact('profils'));
+        return view( 'profil/index', compact('profils'));
     }
 
     /**
@@ -88,8 +88,15 @@ class ProfilController extends Controller
 
     public function home(Profil $profil)
     {
-        $latestArticles = $profil->articles()->get();
-        dd($latestArticles);
+
+
+        $latestArticles = $profil->articles();
+
+        $sql = $latestArticles->toBase()->toSql();
+        dd($sql); 
+
+        // dd($latestArticles);
+
         return view('profil.home', compact('latestArticles'));
     }
     

@@ -31,6 +31,6 @@ class Profil extends Model
 
     public function articles()
     {
-        return $this->hasMany(Article::class, 'profil_id', 'id');
+        return $this->hasMany(Article::class, 'profil_id');
     }
 }
