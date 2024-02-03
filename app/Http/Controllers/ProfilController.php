@@ -12,7 +12,7 @@ class ProfilController extends Controller
 {
     public function __construct()
     {
-          $this->middleware('auth');
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class ProfilController extends Controller
     {
         $profils = Profil::latest()->paginate(4);
 
-        return view( 'profil/index', compact('profils'));
+        return view('profil/index', compact('profils'));
     }
 
     /**
@@ -43,8 +43,7 @@ class ProfilController extends Controller
         $formFields['password'] = Hash::make($request->password);
         Profil::create($formFields);
 
-        return redirect()->route('profil.index')->with('success', "L'administrateur ".$request->name.' a bien été ajouté');
-
+        return redirect()->route('profil.index')->with('success', "L'administrateur " . $request->name . ' a bien été ajouté');
     }
 
     /**
@@ -60,7 +59,7 @@ class ProfilController extends Controller
      */
     public function edit(Profil $profil)
     {
-        return view('profil.edit',compact('profil'));
+        return view('profil.edit', compact('profil'));
     }
 
     /**
@@ -83,23 +82,23 @@ class ProfilController extends Controller
     public function destroy(Profil $profil)
     {
         $profil->delete();
-        return redirect()->route('profil.index')->with('success', "L'administrateur ".$profil->name.' a bien été supprimé.');
+        return redirect()->route('profil.index')->with('success', "L'administrateur " . $profil->name . ' a bien été supprimé.');
     }
 
     public function home(Profil $profil)
     {
+        // $latestArticles = Profil::with(['articles' => function ($query) {
+        //     $query->latest()->take(3);
+        // }])->latest()->get();
 
 
-        $latestArticles = $profil->articles();
+        $userArticles = $profil->articles()->latest()->take(3)->get();
 
-        $sql = $latestArticles->toBase()->toSql();
-        dd($sql); 
 
-        // dd($latestArticles);
+        dd($userArticles) ;
+
+
 
         return view('profil.home', compact('latestArticles'));
     }
-    
-
-    
 }
