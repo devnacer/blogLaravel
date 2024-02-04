@@ -13,20 +13,17 @@
 
 
 
-    @foreach ($latestArticles as $profil)
-        @foreach ($profil->articles as $article)
+    @foreach ($latestArticles as $article)
 
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="/storage/{{ $article->image }}" class="card-img-top" alt="...">
                 <div class="card-body">
-             
-                    <h5 class="card-title">{{ $article->title }}</h5>
-                    <p class="card-text">{{ $article->content }}</p>
+                    <h5 class="card-title">{{ $article->title }}</h5> 
+                    <p class="card-text">{!! Str::limit($article->content, 40) !!}</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
 
-        @endforeach
     @endforeach
 
 

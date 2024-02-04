@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfilRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -85,19 +86,21 @@ class ProfilController extends Controller
         return redirect()->route('profil.index')->with('success', "L'administrateur " . $profil->name . ' a bien été supprimé.');
     }
 
-    public function home(Profil $profil)
+    public function home()
     {
         // $latestArticles = Profil::with(['articles' => function ($query) {
         //     $query->latest()->take(3);
         // }])->latest()->get();
 
+        $adminConnected = Auth::user();
 
-        $userArticles = $profil->articles()->latest()->take(3)->get();
-
-
-        dd($userArticles) ;
-
-
+        $latestArticles = DB::table('articles')
+            ->join('profils', 'profils.id', '=', 'articles.profil_id')
+            ->where('profils.id', '=', $adminConnected->id)
+            ->select('articles.*')
+            ->orderBy('articles.created_at', 'desc') 
+            ->take(3) 
+            ->get();
 
         return view('profil.home', compact('latestArticles'));
     }
