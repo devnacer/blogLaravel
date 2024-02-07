@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SettingController;
 
@@ -32,3 +33,7 @@ Route::get('/login', [LoginController::class, 'show'])->name('login.show')->midd
 Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
+//frontend
+Route::get('/', [FrontendController::class, 'index'])->name('front.index');
+Route::get('/about', [FrontendController::class, 'about'])->name('front.about');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('front.contact');
