@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)  && $profil->trashed()) {
             $request->session()->regenerate();
-            return redirect()->route('category.index')->with([
+            return redirect()->route('profil.home')->with([
                 'success' => 'Vous êtes bien connecté ' . $email,
             ]);
         } else {

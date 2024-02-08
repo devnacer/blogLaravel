@@ -8,7 +8,7 @@
     <!-- categories -->
     <h2>Catégories</h2>
 
-    <div class="py-1 mb-2">
+    <div class="py-1 mb-5">
         <ul class="list-group list-group-horizontal d-flex justify-content-center flex-wrap list-unstyled">
             <?php foreach($categories as $category):?>
         
@@ -46,7 +46,7 @@
                             <strong>{{ $article->profil->name }}</strong></li>
                     </ul>
                     <div class="card-body">
-                        <a href="article.php" class="btn btn-primary d-flex justify-content-center">Lire la suite</a>
+                        <a href="{{route('front.showArticle', $article->id)}}" class="btn btn-primary d-flex justify-content-center">Lire la suite</a>
                     </div>
                 </div>
     
