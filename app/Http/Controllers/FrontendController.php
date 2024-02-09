@@ -18,9 +18,20 @@ class FrontendController extends Controller
         $categories = Category::withCount('articles')->get();
 
         //$articles
-        $articles = $article->latest()->paginate(6);
+        $articles = $article->latest()->paginate(2);
 
         return view('front.index', compact('articles', 'categories'));
+    }
+
+    public function ArticlesByCategory($categoryName){
+
+        $category = Category::where('name', $categoryName)->firstOrFail();
+        $articles = $category->articles()->latest()->paginate(2);
+
+        // dd($articles);
+
+        return view('front.indexArticle', compact('articles','category'));
+
     }
 
     public function showArticle(Article $article)

@@ -13,7 +13,7 @@
             <?php foreach($categories as $category):?>
         
                 <li class="my-1 mx-1">
-                    <a class="btn btn-primary" href="">
+                    <a class="btn btn-primary" href="{{route('ArticlesByCategory', $category->name)}}">
                         {{ $category->name }}
                         <span class='"badge bg-light text-dark'>
                             {{ '('.$category->articles_count.')' }}articles
@@ -51,10 +51,11 @@
                 </div>
     
             @endforeach
+
+            {{ $articles->links() }}
     
         </div>
 
-        {{ $articles->links() }}
 
     </div>
 
