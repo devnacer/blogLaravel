@@ -12,10 +12,10 @@
 
         <div class="d-flex flex-column justify-content-center flex-wrap gap-3">
 
-            @foreach ($articles as $article)
+            @forelse ($articles as $article)
                 <div class="card" style="width: 30rem;">
 
-                    <img src="storage/{{ $article->image }}" class="card-img-top" alt="...">
+                    <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="">
 
                     <div class="card-body">
                         <h5 class="card-title">{{ $article->title }}</h5>
@@ -33,7 +33,9 @@
                             class="btn btn-primary d-flex justify-content-center">Lire la suite</a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <p>Aucun article trouvé.</p>
+            @endforelse
 
             {{ $articles->links() }}
 

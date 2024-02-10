@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\articleResquest;
 
@@ -109,5 +110,25 @@ class ArticleController extends Controller
          $articles = Article::where('profil_id', $id)->latest()->paginate(2);
 
         return view('article.indexArticlesProfil', compact('articles'));
+    }
+
+    // admin latest 3 articles
+    public function home()
+    {
+        // $latestArticles = Profil::with(['articles' => function ($query) {
+        //     $query->latest()->take(3);
+        // }])->latest()->get();
+
+        $adminConnected = Auth::user();
+
+        $latestArticles = DB::table('articles')
+            ->join('profils', 'profils.id', '=', 'articles.profil_id')
+            ->where('profils.id', '=', $adminConnected->id)
+            ->select('articles.*')
+            ->orderBy('articles.created_at', 'desc') 
+            ->take(3) 
+            ->get();
+
+        return view('article.home', compact('latestArticles'));
     }
 }

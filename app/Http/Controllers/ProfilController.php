@@ -85,23 +85,4 @@ class ProfilController extends Controller
         $profil->delete();
         return redirect()->route('profil.index')->with('success', "L'administrateur " . $profil->name . ' a bien été supprimé.');
     }
-
-    public function home()
-    {
-        // $latestArticles = Profil::with(['articles' => function ($query) {
-        //     $query->latest()->take(3);
-        // }])->latest()->get();
-
-        $adminConnected = Auth::user();
-
-        $latestArticles = DB::table('articles')
-            ->join('profils', 'profils.id', '=', 'articles.profil_id')
-            ->where('profils.id', '=', $adminConnected->id)
-            ->select('articles.*')
-            ->orderBy('articles.created_at', 'desc') 
-            ->take(3) 
-            ->get();
-
-        return view('profil.home', compact('latestArticles'));
-    }
 }

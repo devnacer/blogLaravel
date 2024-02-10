@@ -23,7 +23,7 @@ Route::resource('admin/category', CategoryController::class);
 Route::resource('admin/profil', ProfilController::class);
 Route::resource('admin/article', ArticleController::class);
 Route::get('admin/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
-Route::get('admin/home', [ProfilController::class, 'home'])->name('profil.home');
+Route::get('admin/home', [ArticleController::class, 'home'])->name('profil.home');
 
 Route::get('admin/setting/{profil}', [SettingController::class, 'show'])->name('setting.show');
 Route::delete('admin/setting/{profil}', [SettingController::class, 'destroy'])->name('setting.destroy');

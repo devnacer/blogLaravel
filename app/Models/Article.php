@@ -19,6 +19,7 @@ class Article extends Model
         'image',
         'profil_id',
         'category_id',
+        'slug',
     ];
 
     public function getImageAttribute($value){

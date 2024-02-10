@@ -1,11 +1,11 @@
 @section('title33')
-    Tous les Profils
+    Tous les admins
 @endsection
 
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Tous les Profils</h2>
+    <h2>Tous les admins</h2>
 
     @include('partials.alert')
 
@@ -22,7 +22,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($profils as $profil)
+
+
+                @forelse ($profils as $profil)
                     <tr>
                         <th scope="row">{{ $profil->id }}</th>
                         <td>{{ $profil->name }}</td>
@@ -45,7 +47,13 @@
                             </td>
                         @endcan
                     </tr>
-                @endforeach
+                @empty
+                    <td>
+                        <tr>
+                            Aucun admin trouvé.
+                        </tr>
+                    </td>
+                @endforelse
             </tbody>
         </table>
 

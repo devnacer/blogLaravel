@@ -25,7 +25,9 @@
             </thead>
 
             <tbody>
-                @foreach ($articles as $article)
+
+
+                @forelse ($articles as $article)
                     <tr>
                         <th scope="row">{{ $article->id }}</th>
                         <td>{{ $article->title }}</td>
@@ -50,7 +52,11 @@
 
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td>Aucun article trouvé.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 

@@ -21,7 +21,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categories as $category)
+
+
+                @forelse ($categories as $category)
                     <tr>
                         <th scope="row">{{ $category->id }}</th>
                         <td>{{ $category->name }}</td>
@@ -42,9 +44,15 @@
                                 </form>
                             </td>
                         @endcan
-                        
+
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td>
+                            Aucune catégorie trouvée.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 

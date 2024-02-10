@@ -23,6 +23,7 @@ class articleResquest extends FormRequest
     {
         return [
              'title' => 'required|min:2|max:255',
+             'slug' => 'required', 'max:120', 'unique:articles', 'alpha_dash:ascii',
              'content' => 'required|min:2',
              'image' => 'image|mimes:png,jpeg,jpg,svg',
              'category_id' => 'required',

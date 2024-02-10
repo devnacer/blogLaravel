@@ -22,9 +22,17 @@
         </div>
 
         <div class="form-group">
-            <label  class="form-label mt-4">Contenu</label>
-            <textarea  id="content" name="content" 
-                > {{ old('content')}} </textarea>
+            <label for="slug" class="form-label mt-4">Slug</label>
+            <input type="text" class="form-control" id="articleSlug" name="slug" placeholder="Entrez le titre le slug"
+                value="{{ old('slug') }}" required>
+            @error('slug')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label class="form-label mt-4">Contenu</label>
+            <textarea id="content" name="content"> {{ old('content') }} </textarea>
             @error('content')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -55,15 +63,39 @@
         </div>
 
         <button type="submit" name="create" class="btn btn-primary mt-4 mb-4">Ajouter un article</button>
-        
+
         <script>
             ClassicEditor
-                .create( document.querySelector( '#content' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
+                .create(document.querySelector('#content'))
+                .catch(error => {
+                    console.error(error);
+                });
         </script>
-        
-        
+
     </form>
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include JavaScript file -->
+    <script>
+        $(document).ready(function() {
+            // Function to generate slug from title
+            function generateSlug(title) {
+                return title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+            }
+
+            // Event listener for the title input field
+            $('#articleTitle').on('input', function() {
+                // Get the entered title
+                var title = $(this).val();
+
+                // Generate the slug
+                var slug = generateSlug(title);
+
+                // Set the generated slug to the slug input field
+                $('#articleSlug').val(slug);
+            });
+        });
+    </script>
 @endsection

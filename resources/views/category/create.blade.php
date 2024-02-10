@@ -1,5 +1,5 @@
 @section('title33')
-    Mes Catégories
+Créer une catégorie
 @endsection
 
 @extends('layouts.master')

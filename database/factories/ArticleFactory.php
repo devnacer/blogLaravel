@@ -22,6 +22,7 @@ class ArticleFactory extends Factory
             'image' => 'article/articleNoImage.png',
             'profil_id' => fake()->randomElement([1, 2]),
             'category_id' => fake()->randomElement([1, 2, 3, 4]),
+            'slug' => fake()->slug,
         ];
     }
 }

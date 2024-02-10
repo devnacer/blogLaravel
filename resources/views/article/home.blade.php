@@ -12,7 +12,9 @@
     <h3>Voici tes trois articles les plus récents que tu as publiés.</h3>
 
     <div class="row row-cols-1 g-4 mb-5 my-2">
-        @foreach ($latestArticles as $article)
+        
+        
+        @forelse ($latestArticles as $article)
             <div class="card mx-3" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $article->title }}</h5>
@@ -43,7 +45,12 @@
                     <a href="#" class="card-link">Another link</a> --}}
                 </div>
             </div>
-        @endforeach
+            @empty
+            <p>
+                Aucun article trouvé.
+            </p>
+
+            @endforelse
 
 
     </div>
