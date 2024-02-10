@@ -56,7 +56,9 @@
                 <p>Aucun article trouvé.</p>
             @endforelse
 
-            {{ $articles->links() }}
+            @if ($articles->hasPages())
+                {{ $articles->links() }}
+            @endif
 
         </div>
 

@@ -62,5 +62,8 @@
 
     </div>
 
-    {{ $articles->links() }}
+    @if ($articles->hasPages())
+        {{ $articles->links() }}
+    @endif
+    
 @endsection

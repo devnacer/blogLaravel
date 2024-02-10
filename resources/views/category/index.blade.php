@@ -58,5 +58,7 @@
 
     </div>
 
-    {{ $categories->links() }}
+    @if ($categories->hasPages())
+        {{ $categories->links() }}
+    @endif
 @endsection

@@ -59,5 +59,7 @@
 
     </div>
 
-    {{ $profils->links() }}
+    @if ($profils->hasPages())
+        {{ $profils->links() }}
+    @endif
 @endsection
