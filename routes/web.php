@@ -36,6 +36,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 //frontend
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 Route::get('/article/{article}', [FrontendController::class, 'showArticle'])->name('front.showArticle');
+Route::post('/article/{article}', [FrontendController::class, 'storeComment'])->name('front.storeComment');
 
 // index articles they have the same category 
 Route::get('/articles/category/{category}', [FrontendController::class, 'ArticlesByCategory'])->name('ArticlesByCategory');
