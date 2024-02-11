@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SettingController;
@@ -36,7 +37,15 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 //frontend
 Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 Route::get('/article/{article}', [FrontendController::class, 'showArticle'])->name('front.showArticle');
-Route::post('/article/{article}', [FrontendController::class, 'storeComment'])->name('front.storeComment');
+//comment
+// add comment for guest
+Route::post('/article/{article}', [CommentController::class, 'storeComment'])->name('front.storeComment');
+// add comment for admin
+Route::post('/admin/article/{article}', [CommentController::class, 'storeCommentAdmin'])->name('admin.storeComment');
+
+// delete comment / only admine authorise to do this
+Route::delete('/admin/article/{article}/comment/{comment}', [CommentController::class, 'destroyComment'])
+    ->name('destroyComment');
 
 // index articles they have the same category 
 Route::get('/articles/category/{category}', [FrontendController::class, 'ArticlesByCategory'])->name('ArticlesByCategory');

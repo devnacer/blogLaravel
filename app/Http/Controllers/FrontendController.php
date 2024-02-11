@@ -70,16 +70,7 @@ class FrontendController extends Controller
         return redirect()->route('front.contact')->with('success', 'Le message a bien été envoyé.');
     }
 
-    public function storeComment(CommentRequest $request)
-    {
-        $formFields = $request->validated();
 
-        $articleId = $request->article;
 
-        $formFields['article_id'] = $articleId;
-        // insertion
-        Comment::create($formFields);
-
-        return redirect()->route('front.showArticle', $articleId);
-    }
+ 
 }

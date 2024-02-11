@@ -8,6 +8,7 @@
     <h2>{{ $article->title }}</h2>
 
     <div class="card mb-3">
+        
         <div class="card-body">
             <img src="{{ asset('storage/' . $article->image) }}" class="mx-3 my-3 card-img-top w-25" alt="...">
             <hr>
@@ -81,5 +82,5 @@
 
         </div>
     </div>
-    
+
 @endsection
