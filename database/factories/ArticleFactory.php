@@ -23,6 +23,7 @@ class ArticleFactory extends Factory
             'profil_id' => fake()->randomElement([1, 2]),
             'category_id' => fake()->randomElement([1, 2, 3, 4]),
             'slug' => fake()->slug,
+            'tags' => $this->faker->randomElements(['Eloquent', 'Blade', 'Migrations']),
         ];
     }
 }

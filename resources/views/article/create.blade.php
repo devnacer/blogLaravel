@@ -62,6 +62,16 @@
             @enderror
         </div>
 
+        <div class="form-group">
+            <label class="form-label mt-4">Tags</label>
+            <input type="text" class="form-control" id="tags" name="tags"
+            placeholder="Entrez des tags séparés par des virgules" value="{{ old('tags') }}" required>
+            @error('tags')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+
+
         <button type="submit" name="create" class="btn btn-primary mt-4 mb-4">Ajouter un article</button>
 
         <script>

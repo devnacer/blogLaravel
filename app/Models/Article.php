@@ -21,6 +21,10 @@ class Article extends Model
         'profil_id',
         'category_id',
         'slug',
+        'tags',
+    ];
+    protected $casts = [
+        'tags' => 'array',
     ];
 
     public function getImageAttribute($value){

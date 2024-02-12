@@ -36,23 +36,36 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(articleResquest $request)
     {
-        $formFields = $request->validated();
+        // Convert the tags string into an array
+        $tagsArray = $request->input('tags') ? explode(',', $request->input('tags')) : [];
+        // Remove any leading or trailing spaces from each tag
+        $tagsArray = array_map('trim', $tagsArray);
+        // Filter out empty tags
+        $tagsArray = array_filter($tagsArray);
 
-        // image
+        // Validate form fields
+        $validatedData = $request->validated();
+
+        // Process tags
+        $validatedData['tags'] = $tagsArray;
+
+        // Process image
         if ($request->hasFile('image')) {
-
-            $formFields['image'] = $request->file('image')->store('article', 'public');
+            $validatedData['image'] = $request->file('image')->store('article', 'public');
         }
 
-        $formFields['profil_id'] = Auth::id();
+        // Add current user's ID
+        $validatedData['profil_id'] = Auth::id();
 
-        //insertion
-        Article::create($formFields);
+        // Insert the article
+        Article::create($validatedData);
 
-        return redirect()->route('article.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été ajouté.');
+        return redirect()->route('article.index')->with('success', 'The article "' . $validatedData['title'] . '" has been successfully added.');
     }
+
 
     /**
      * Display the specified resource.
@@ -106,8 +119,8 @@ class ArticleController extends Controller
     // ArticlesController.php
     public function indexArticlesProfil()
     {
-         $id = Auth::id();
-         $articles = Article::where('profil_id', $id)->latest()->paginate(2);
+        $id = Auth::id();
+        $articles = Article::where('profil_id', $id)->latest()->paginate(2);
 
         return view('article.indexArticlesProfil', compact('articles'));
     }
@@ -125,8 +138,8 @@ class ArticleController extends Controller
             ->join('profils', 'profils.id', '=', 'articles.profil_id')
             ->where('profils.id', '=', $adminConnected->id)
             ->select('articles.*')
-            ->orderBy('articles.created_at', 'desc') 
-            ->take(3) 
+            ->orderBy('articles.created_at', 'desc')
+            ->take(3)
             ->get();
 
         return view('article.home', compact('latestArticles'));
