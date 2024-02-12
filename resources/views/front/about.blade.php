@@ -31,7 +31,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Nombre total de commentaires sur ce blog
-                <span class="badge bg-primary rounded-pill">gg</span>
+                <span class="badge bg-primary rounded-pill">{{$commentCount}}</span>
             </li>            
         </ul>
         

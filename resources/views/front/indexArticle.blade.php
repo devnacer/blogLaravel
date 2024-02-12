@@ -1,5 +1,5 @@
 @section('title33')
-    Ajouter un article
+Derniers articles (Catégorie {{ $category->name }} )
 @endsection
 
 @extends('layouts.master')

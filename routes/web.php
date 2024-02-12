@@ -39,12 +39,9 @@ Route::get('/', [FrontendController::class, 'index'])->name('front.index');
 Route::get('/article/{article}', [FrontendController::class, 'showArticle'])->name('front.showArticle');
 //comment
 // add comment for guest
-Route::post('/article/{article}', [CommentController::class, 'storeComment'])->name('front.storeComment');
-// add comment for admin
-Route::post('/admin/article/{article}', [CommentController::class, 'storeCommentAdmin'])->name('admin.storeComment');
-
+Route::post('/article/{article}', [CommentController::class, 'store'])->name('front.storeComment');
 // delete comment / only admine authorise to do this
-Route::delete('/admin/article/{article}/comment/{comment}', [CommentController::class, 'destroyComment'])
+Route::delete('/admin/article/{article}/comment/{comment}', [CommentController::class, 'destroy'])
     ->name('destroyComment');
 
 // index articles they have the same category 

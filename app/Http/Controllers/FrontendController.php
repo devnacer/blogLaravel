@@ -20,7 +20,8 @@ class FrontendController extends Controller
         $categories = Category::withCount('articles')->get();
 
         //$articles
-        $articles = $article->latest()->paginate(2);
+        // $articles = $article->latest()->paginate(2);
+        $articles = $article->withCount('comments')->latest()->paginate(2);
 
         return view('front.index', compact('articles', 'categories'));
     }
@@ -46,9 +47,10 @@ class FrontendController extends Controller
         $articleCount = Article::count();
         $categoryCount = Category::count();
         $latestArticle = Article::latest()->first();
+        $commentCount = Comment::count();
 
 
-        return view('front.about', compact('articleCount', 'categoryCount', 'latestArticle'));
+        return view('front.about', compact('articleCount', 'categoryCount', 'latestArticle','commentCount'));
     }
 
     public function contact()

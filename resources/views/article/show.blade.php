@@ -67,24 +67,6 @@
 
             </div>
 
-            {{-- add comment --}}
-            <h4 class="card-title my-4"><strong>Ajouter un commentaire</strong></h4>
-                <form method="post" action="{{ route('admin.storeComment', $article->id) }}">
-
-                @csrf
-
-                <div class="form-group">
-                    <label for="content" class="form-label mt-4">Votre Commentaire</label>
-                    <textarea class="form-control" id="content" name="content" rows="3" placeholder="Entrez votre commentaire"
-                        required></textarea>
-                    @error('content')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div> 
-
-                <button type="submit" class="btn btn-primary my-4">Envoyer</button>
-            </form> 
-
         </div>
     </div>
 
