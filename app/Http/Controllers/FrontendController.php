@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profil;
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Category;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfilRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\contactRequest;
-use App\Models\Comment;
 
 class FrontendController extends Controller
 {
@@ -50,7 +53,7 @@ class FrontendController extends Controller
         $commentCount = Comment::count();
 
 
-        return view('front.about', compact('articleCount', 'categoryCount', 'latestArticle','commentCount'));
+        return view('front.about', compact('articleCount', 'categoryCount', 'latestArticle', 'commentCount'));
     }
 
     public function contact()
@@ -72,7 +75,17 @@ class FrontendController extends Controller
         return redirect()->route('front.contact')->with('success', 'Le message a bien été envoyé.');
     }
 
+    public function create()
+    {
+        return view('front.registration');
+    }
 
-
- 
+    public function store(ProfilRequest $request)
+    {
+        $formFields = $request->validated();
+        $formFields['role'] = 'standard';
+        $formFields['password'] = Hash::make($request->password);
+        dd($formFields);
+        // Profil::create($formFields);
+    }
 }

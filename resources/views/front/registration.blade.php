@@ -1,25 +1,25 @@
 @section('title33')
-    Ajouter un admin
+Inscription
 @endsection
 
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Ajouter un admin</h2>
+    <h2>Inscription</h2>
 
-    <form action="{{ route('profil.store') }}" method="POST">
+    <form action="{{ route('store.registration') }}" method="POST">
         @csrf
 
         <div class="form-group">
             <label for="name" class="form-label mt-4">Nom</label>
             <input type="text" class="form-control" id="ProfilName" name="name"
-                placeholder="Entrez le nom de l'administrateur" value="{{ old('name') }}" required>
+                placeholder="Entrez votre nom" value="{{ old('name') }}" required>
             @error('name')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
-        <div class="form-group" style="display: none">
+        <div class="form-group">
             <label for="email" class="form-label mt-4">Email</label>
             <input type="email" placeholder="Entrez votre adresse e-mail" value="{{ old('email') }}" name="email"
                 class="form-control" id="inputEmail">
@@ -32,9 +32,12 @@
             <label for="role" class="form-label mt-4">Rôle</label>
             <select name="role" class="form-control">
                 <option value="" disabled selected>Choisissez un rôle</option>
+                <option value="admin">Admin</option>
+                <option value="superAdmin">Super Admin</option>
                 <option value="standard">Standard </option>
             </select>
         </div>
+
 
         <div class="form-group">
             <label for="password" class="form-label mt-4">Mot de passe</label>
@@ -51,7 +54,7 @@
                 placeholder="Confirmez votre mot de passe">
         </div>
 
-        <button type="submit" name="create" class="btn btn-primary mt-4 mb-4">Ajouter</button>
+        <button type="submit" name="create" class="btn btn-primary mt-4 mb-4">je m'inscris</button>
 
     </form>
 @endsection

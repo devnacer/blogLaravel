@@ -24,7 +24,7 @@ class ProfilRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:55',
             'email' => 'required|email|unique:profils,email',
-            'role' => 'required|in:admin,superAdmin',
+            'role' => 'required|in:admin,superAdmin,standard',
             'password' => 'required|min:3|confirmed',
         ];
     }

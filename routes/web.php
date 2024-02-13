@@ -50,3 +50,7 @@ Route::get('/articles/category/{category}', [FrontendController::class, 'Article
 Route::get('/about', [FrontendController::class, 'about'])->name('front.about');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('front.contact');
 Route::post('/contact', [FrontendController::class, 'sendMessage'])->name('front.sendMessage');
+
+//
+Route::get('/registration', [FrontendController::class, 'create'])->name('create.registration');
+Route::post('/registration', [FrontendController::class, 'store'])->name('store.registration');

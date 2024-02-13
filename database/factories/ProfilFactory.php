@@ -21,7 +21,7 @@ class ProfilFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->email(),
             // 'role' => fake()->text(12),
-            'role' => fake()->randomElement(['admin', 'superAdmin']),
+            'role' => fake()->randomElement(['admin', 'superAdmin', 'standard']),
             'password' => Hash::make('password'),
         ];
     }
