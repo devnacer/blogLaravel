@@ -1,5 +1,5 @@
 @section('title33')
-Inscription
+    Inscription
 @endsection
 
 @extends('layouts.master')
@@ -12,8 +12,8 @@ Inscription
 
         <div class="form-group">
             <label for="name" class="form-label mt-4">Nom</label>
-            <input type="text" class="form-control" id="ProfilName" name="name"
-                placeholder="Entrez votre nom" value="{{ old('name') }}" required>
+            <input type="text" class="form-control" id="ProfilName" name="name" placeholder="Entrez votre nom"
+                value="{{ old('name') }}" required>
             @error('name')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -28,12 +28,9 @@ Inscription
             @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: none">
             <label for="role" class="form-label mt-4">Rôle</label>
             <select name="role" class="form-control">
-                <option value="" disabled selected>Choisissez un rôle</option>
-                <option value="admin">Admin</option>
-                <option value="superAdmin">Super Admin</option>
                 <option value="standard">Standard </option>
             </select>
         </div>

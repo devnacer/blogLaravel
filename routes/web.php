@@ -54,3 +54,5 @@ Route::post('/contact', [FrontendController::class, 'sendMessage'])->name('front
 //
 Route::get('/registration', [FrontendController::class, 'create'])->name('create.registration');
 Route::post('/registration', [FrontendController::class, 'store'])->name('store.registration');
+Route::get('/verify_email/{hash}',[FrontendController::class, 'verifyEmail']);
+

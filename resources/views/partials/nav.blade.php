@@ -100,9 +100,9 @@
                 @endauth
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('front.index')}}">Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">Accueil</a>
                 </li>
-{{-- 
+                {{-- 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="">Catégories</a>
                 </li> --}}
@@ -112,7 +112,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('front.contact')}}">Contact</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('front.contact') }}">Contact</a>
                 </li>
 
                 <li class="nav-item">
@@ -120,7 +120,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('create.registration')}}">Inscription</a>
+                    <a class="nav-link active" aria-current="page"
+                        href="{{ route('create.registration') }}">Inscription</a>
                 </li>
 
             </ul>
@@ -130,7 +131,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
 
-            
+
 
         </div>
     </div>

@@ -19,6 +19,8 @@ class Profil extends Model
         'email',
         'role',
         'password',
+        'email_verified_at',
+
     ];
     protected $hidden = [
         'remember_token',

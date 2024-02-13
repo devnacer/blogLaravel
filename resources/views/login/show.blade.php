@@ -23,8 +23,10 @@
 @section('section12')
     <form method="POST" action="{{ route('login') }}" class="form-signin">
         @csrf
-        
+
         <h2 class="h3 my-3 fw-normal">Connexion</h2>
+
+        @include('partials.alert')
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" name="login" value="{{ old('login') }}">

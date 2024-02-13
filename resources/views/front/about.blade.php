@@ -16,22 +16,28 @@
 
         <br>
 
-        <ul class="list-group">
+        <h3>Statistiques pour ce blog</h3>
+
+        <ul class="list-group mt-4">
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre d'articles sur ce blog
-                <span class="badge bg-primary rounded-pill">{{$articleCount}}</span>
+                Nombre de membres
+                <span class="badge bg-primary rounded-pill">{{ $profilsCount }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre de catégories sur ce blog
-                <span class="badge bg-primary rounded-pill">{{$categoryCount}}</span>
+                Nombre d'articles 
+                <span class="badge bg-primary rounded-pill">{{ $articleCount }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Nombre de catégories 
+                <span class="badge bg-primary rounded-pill">{{ $categoryCount }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 Dernier article publié
-                <span class="badge bg-primary rounded-pill">{{$latestArticle->title}}</span>
+                <span class="badge bg-primary rounded-pill">{{ $latestArticle->title }}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre total de commentaires sur ce blog
-                <span class="badge bg-primary rounded-pill">{{$commentCount}}</span>
+                Nombre total de commentaires 
+                <span class="badge bg-primary rounded-pill">{{ $commentCount }}</span>
             </li>            
         </ul>
         

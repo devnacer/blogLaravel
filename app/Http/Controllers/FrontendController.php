@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\contactRequest;
+use App\Mail\RegistrationMail;
 
 class FrontendController extends Controller
 {
@@ -47,13 +48,14 @@ class FrontendController extends Controller
 
     public function about()
     {
+        $profilsCount = Profil::count();
         $articleCount = Article::count();
         $categoryCount = Category::count();
         $latestArticle = Article::latest()->first();
         $commentCount = Comment::count();
 
 
-        return view('front.about', compact('articleCount', 'categoryCount', 'latestArticle', 'commentCount'));
+        return view('front.about', compact('profilsCount', 'articleCount', 'categoryCount', 'latestArticle', 'commentCount'));
     }
 
     public function contact()
@@ -85,7 +87,45 @@ class FrontendController extends Controller
         $formFields = $request->validated();
         $formFields['role'] = 'standard';
         $formFields['password'] = Hash::make($request->password);
-        dd($formFields);
-        // Profil::create($formFields);
+        $profil = Profil::create($formFields);
+        //send confirmation mail
+        $name = $profil->name;
+        $mail = new RegistrationMail($profil);
+        Mail::to('kalache.nacer.kn@gmail.com')->send($mail);
+        return view('front.confirmationMail', compact('name'));
     }
+
+    public function verifyEmail($hash)
+    {
+        // Decode the hash
+        $decodedHash = base64_decode($hash);
+    
+        // Check if decoding is successful
+        if (!$decodedHash) {
+            abort(404);
+        }
+    
+        // Extract values from the hash
+        [$createdAt, $id] = explode('///', $decodedHash);
+    
+        // Retrieve the profile using the ID
+        $profile = Profil::findOrFail($id);
+    
+        // Check if the profile is already verified
+        if ($profile->email_verified_at !== null) {
+            return redirect()->route('login')->with('success', 'Your account is already verified. Log in now.');
+        }
+    
+        // Check if the timestamp in the hash matches the profile's creation date
+        if ($profile->created_at->toDateTimeString() !== $createdAt) {
+            abort(404);
+        }
+    
+        // Update the 'email_verified_at' column
+        $profile->update(['email_verified_at' => now()]);
+    
+        // Redirect to the login route with a success message
+        return redirect()->route('login')->with('success', 'Your account has been successfully verified. Log in now.');
+    }
+    
 }
