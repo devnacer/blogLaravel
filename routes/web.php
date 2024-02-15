@@ -57,4 +57,7 @@ Route::post('/registration', [FrontendController::class, 'store'])->name('store.
 Route::get('/verify_email/{hash}',[FrontendController::class, 'verifyEmail']);
 
 //reset password
+Route::get('/password/reset', [LoginController::class, 'passwordReset'])->name('password.reset');
+Route::post('/password/reset', [LoginController::class, 'passwordResetSendMail'])->name('password.reset.send.mail');
 
+Route::get('/reset_password/{hash}',[FrontendController::class, 'verifyEmail']);

@@ -41,6 +41,10 @@
             <label for="floatingPassword">Mot de passe</label>
         </div>
 
+        <div class="form-floating my-2">
+            <a href="{{ route('password.reset') }}">Mot de passe oublié?</a>
+        </div>
+
         <button class="w-100 btn btn-lg btn-primary" type="submit">Se connecter</button>
 
     </form>
