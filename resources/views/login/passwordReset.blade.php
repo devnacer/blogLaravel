@@ -21,7 +21,7 @@
 @extends('layouts.master')
 
 @section('section12')
-    <form method="POST" action="{{ route('password.reset.send.mail')}}" class="form-signin">
+    <form method="POST" action="{{route('password.reset.send.email')}}" class="form-signin">
         @csrf
 
         <h2 class="h3 my-3 fw-normal">Mot de passe oublié?</h2>

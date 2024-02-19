@@ -3,6 +3,8 @@
 namespace App\Mail;
 
 use App\Models\Profil;
+use Illuminate\Support\Str;
+use App\Models\PasswordReset;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -37,14 +39,23 @@ class ResetPasswordMail extends Mailable
      */
     public function content(): Content
     {
-        $id = $this->profil->id;
-        $created_at = $this->profil->created_at;
-        $href = url()->to('/reset_password/' . base64_encode($created_at . '///' . $id));
+        // $id = $this->profil->id;
+        $name = $this->profil->name;
+        $email = $this->profil->email;
+        // Génération d'un jeton unique
+        $token = Str::random(40);
+        
+        $href = url()->to('password/reset/' . base64_encode($token));
+        
+        PasswordReset::updateOrCreate(
+            ['email' => $email],
+            ['token' => $token]
+        );
         return new Content(
-            view: 'mail.registration',
+            view: 'mail.resetPassword',
             with: [
-                'name' => $this->profil->name,
-                'email' => $this->profil->email,
+                'name' => $name,
+                'email' => $email,
                 'href' => $href,
             ]
         );

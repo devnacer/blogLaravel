@@ -99,33 +99,32 @@ class FrontendController extends Controller
     {
         // Decode the hash
         $decodedHash = base64_decode($hash);
-    
+
         // Check if decoding is successful
         if (!$decodedHash) {
             abort(404);
         }
-    
+
         // Extract values from the hash
         [$createdAt, $id] = explode('///', $decodedHash);
-    
+
         // Retrieve the profile using the ID
         $profile = Profil::findOrFail($id);
-    
+
         // Check if the profile is already verified
         if ($profile->email_verified_at !== null) {
             return redirect()->route('login')->with('success', 'Your account is already verified. Log in now.');
         }
-    
+
         // Check if the timestamp in the hash matches the profile's creation date
         if ($profile->created_at->toDateTimeString() !== $createdAt) {
             abort(404);
         }
-    
+
         // Update the 'email_verified_at' column
         $profile->update(['email_verified_at' => now()]);
-    
+
         // Redirect to the login route with a success message
         return redirect()->route('login')->with('success', 'Your account has been successfully verified. Log in now.');
     }
-    
 }

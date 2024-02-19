@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Profil;
 use Illuminate\Http\Request;
+use App\Models\PasswordReset;
 use App\Mail\RegistrationMail;
 use App\Mail\ResetPasswordMail;
 use App\Http\Requests\ProfilRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\ResetEmailRequest;
@@ -79,25 +81,67 @@ class LoginController extends Controller
         return view('login.passwordReset');
     }
 
-    public function passwordResetSendMail(ResetEmailRequest $request)
+    public function passwordResetSendEmail(ResetEmailRequest $request)
     {
 
         // Validation de l'adresse e-mail
         $request->validated();
-        
+
         // Logique d'envoi de l'e-mail de réinitialisation de mot de passe
-        
+
         // ReSend confirmation mail
-        
-        $profil = Profil::where('email', $request->email)->firstOrFail();;
-        
+
+        $profil = Profil::where('email', $request->email)->firstOrFail();
+
         $mail = new ResetPasswordMail($profil);
-        dd($mail);
-        // Mail::to('kalache.nacer.kn@gmail.com')->send($mail);
+
+        Mail::to('kalache.nacer.kn@gmail.com')->send($mail);
 
         // Redirection vers la page de réinitialisation de mot de passe avec un message de succès
         return redirect()->route('password.reset')->with([
             'success' => 'Nous avons envoyé un e-mail à votre compte pour réinitialiser votre mot de passe.',
         ]);
+    }
+
+    public function passwordEdit($hash)
+    {
+        return view('login.passwordEdit', compact('hash'));
+    }
+
+    public function passwordUpdate(Request $request, $hash)
+    {
+        // Decode the token
+        $token = base64_decode($hash);
+
+        // Find the password reset record by the token
+        $passwordReset = PasswordReset::where('token', $token)->first();
+
+        if (!$passwordReset) {
+            return redirect()->route('login')->with('error', 'Invalid token');
+        }
+        
+        // Validate the request data
+        $request->validate([
+            'password' => 'required|min:3|confirmed',
+        ]);
+
+
+        // Find the user by email
+        $user = Profil::where('email', $passwordReset->email)->first();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'User not found');
+        }
+
+        // Reset the password
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        // Delete the password reset record
+        $passwordReset->delete();
+
+        // Redirect to the login page with a success message
+        return redirect()->route('login')->with('success', 'Password updated successfully.');
     }
 }
