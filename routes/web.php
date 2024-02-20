@@ -21,7 +21,9 @@ use App\Http\Controllers\SettingController;
 */
 
 Route::resource('admin/category', CategoryController::class);
-Route::resource('admin/profil', ProfilController::class);
+Route::resource('admin/profil', ProfilController::class)->except([
+    'show'
+]);
 Route::resource('admin/article', ArticleController::class);
 Route::get('admin/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
 Route::get('admin/home', [ArticleController::class, 'home'])->name('profil.home');

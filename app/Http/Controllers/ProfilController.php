@@ -14,6 +14,7 @@ class ProfilController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Profil::class, 'profil'); // Assuming 'profil' is the resource key for Profil model
     }
     /**
      * Display a listing of the resource.
@@ -50,10 +51,10 @@ class ProfilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profil $profil)
-    {
-        //
-    }
+    // public function show(Profil $profil)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.

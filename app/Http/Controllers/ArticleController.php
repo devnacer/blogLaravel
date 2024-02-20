@@ -14,6 +14,7 @@ class ArticleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Article::class, 'article'); // Assuming 'article' is the resource key for Article model
     }
     /**
      * Display a listing of the resource.

@@ -68,7 +68,6 @@ class LoginController extends Controller
         }
     }
 
-
     public function logout()
     {
         Session::flush();
@@ -83,26 +82,24 @@ class LoginController extends Controller
 
     public function passwordResetSendEmail(ResetEmailRequest $request)
     {
-
-        // Validation de l'adresse e-mail
+        // Email address validation
         $request->validated();
-
-        // Logique d'envoi de l'e-mail de réinitialisation de mot de passe
-
-        // ReSend confirmation mail
-
-        $profil = Profil::where('email', $request->email)->firstOrFail();
-
-        $mail = new ResetPasswordMail($profil);
-
+    
+        // Retrieve the user profile associated with the email
+        $profile = Profil::where('email', $request->email)->firstOrFail();
+    
+        // Create a new instance of the ResetPasswordMail class
+        $mail = new ResetPasswordMail($profile);
+    
+        // Send the email to the specified email address
         Mail::to('kalache.nacer.kn@gmail.com')->send($mail);
-
-        // Redirection vers la page de réinitialisation de mot de passe avec un message de succès
+    
+        // Redirect to the password reset page with a success message
         return redirect()->route('password.reset')->with([
-            'success' => 'Nous avons envoyé un e-mail à votre compte pour réinitialiser votre mot de passe.',
+            'success' => 'We have sent an email to your account to reset your password.',
         ]);
     }
-
+    
     public function passwordEdit($hash)
     {
         return view('login.passwordEdit', compact('hash'));
@@ -117,7 +114,7 @@ class LoginController extends Controller
         $passwordReset = PasswordReset::where('token', $token)->first();
 
         if (!$passwordReset) {
-            return redirect()->route('login')->with('error', 'Invalid token');
+            abort(404, 'Page not found');
         }
         
         // Validate the request data
@@ -125,12 +122,11 @@ class LoginController extends Controller
             'password' => 'required|min:3|confirmed',
         ]);
 
-
         // Find the user by email
         $user = Profil::where('email', $passwordReset->email)->first();
 
         if (!$user) {
-            return redirect()->route('login')->with('error', 'User not found');
+            abort(404, 'Page not found');
         }
 
         // Reset the password
@@ -142,6 +138,6 @@ class LoginController extends Controller
         $passwordReset->delete();
 
         // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'Password updated successfully.');
+        return redirect()->route('login')->with('success', 'Mot de passe mis à jour avec succès.');
     }
 }

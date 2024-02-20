@@ -10,30 +10,50 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+                
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">Accueil</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('front.about') }}">À propos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('front.contact') }}">Contact</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav mb-2 mb-lg-0 mr-auto">
                 @auth
 
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('profil.home') }}">Accueil</a>
+                        <a class="nav-link active text-light text-danger btn btn-outline-primary"  aria-current="page" href="{{ route('profil.home') }}">{{ Auth::user()->name }}</a>
                     </li>
 
                     {{-- profil --}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profil.index') }}">Voir tous les admins</a></li>
+                    @can('view', App\Models\Profil::class)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('profil.index') }}">Voir tous les admins</a></li>
 
-                            @can('create', App\Models\Profil::class)
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="{{ route('profil.create') }}">Ajouter un admin</a></li>
-                            @endcan
+                                @can('create', App\Models\Profil::class)
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('profil.create') }}">Ajouter un admin</a></li>
+                                @endcan
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
+                    @endcan
+
                     {{-- end_profil --}}
 
                     {{-- article --}}
@@ -43,9 +63,9 @@
                             Article
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                            <li><a class="dropdown-item" href="{{ route('article.index') }}">Voir tous les articles</a></li>
-
+                            @can('view', App\Models\Profil::class)
+                                <li><a class="dropdown-item" href="{{ route('article.index') }}">Voir tous les articles</a></li>
+                            @endcan
                             <li><a class="dropdown-item" href="{{ route('articles.index') }}">Voir mes articles</a></li>
 
                             <li>
@@ -70,15 +90,13 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('category.create') }}">Ajouter une Catégorie</a>
-                            </li>
+                            @can('view', App\Models\Profil::class)
+                                <li><a class="dropdown-item" href="{{ route('category.create') }}">Ajouter une Catégorie</a>
+                                </li>
+                            @endcan
                         </ul>
                     </li>
                     {{-- end_category --}}
-
-                    {{-- <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li> --}}
 
                     {{-- login --}}
                     <li class="nav-item dropdown">
@@ -98,23 +116,6 @@
                     {{-- end_login --}}
 
                 @endauth
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">Accueil</a>
-                </li>
-                {{-- 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Catégories</a>
-                </li> --}}
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('front.about') }}">À propos</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('front.contact') }}">Contact</a>
-                </li>
-
                 @guest
 
                     <li class="nav-item">
@@ -127,9 +128,9 @@
                     </li>
 
                 @endguest
-
-
             </ul>
+
+
 
             {{-- <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

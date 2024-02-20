@@ -21,33 +21,34 @@ class CategoryPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Category $category): bool
-    {
+    // public function view(User $user, Category $category): bool
+    // {
         
-    }
+    // }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(GenericUser $profil): bool
     {
-        //
+        return $profil->role === 'superAdmin' || $profil->role === 'admin';
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(GenericUser $profil, Category $category): bool
+    public function update(GenericUser $profil): bool
     {
-        //
+        return $profil->role === 'superAdmin' || $profil->role === 'admin';
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Category $category): bool
+    public function delete(GenericUser $profil): bool
     {
-        //
+        return $profil->role === 'superAdmin' || $profil->role === 'admin';
+
     }
 
     /**
