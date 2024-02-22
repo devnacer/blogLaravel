@@ -30,12 +30,13 @@ class ArticlePolicy
         }
 
         // Sinon, vérifier si le profil correspond à l'auteur de l'article
-        return $profil->id === $article->profil_id;    }
+        return $profil->id === $article->profil_id;
+    }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(GenericUser $profil): bool
     {
         return true;
     }
@@ -49,25 +50,34 @@ class ArticlePolicy
         if ($profil->role === 'superAdmin') {
             return true; // Le super admin peut mettre à jour n'importe quel article
         }
-
         // Sinon, vérifier si le profil correspond à l'auteur de l'article
-        return $profil->id === $article->profil_id;
+        if ($profil->id === $article->profil_id) {
+            return true;
+        }
+
+        return false;
     }
 
 
     /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(GenericUser $profil, Article $article): bool
-    {
-        // Vérifier si le profil est super admin
-        if ($profil->role === 'superAdmin') {
-            return true; // Le super admin peut mettre à jour n'importe quel article
-        }
-
-        // Sinon, vérifier si le profil correspond à l'auteur de l'article
-        return $profil->id === $article->profil_id;
+ * Determine whether the user can delete the model.
+ */
+public function delete(GenericUser $profil, Article $article): bool
+{
+    // Le super admin peut effectuer toutes les actions
+    if ($profil->role === 'superAdmin') {
+        return true;
     }
+
+    // Vérifie si le profil correspond à l'auteur de l'article
+    if ($profil->id === $article->profil_id) {
+        return true;
+    }
+
+    // Par défaut, l'utilisateur n'est pas autorisé à supprimer l'article
+    return false;
+}
+
 
     /**
      * Determine whether the user can restore the model.

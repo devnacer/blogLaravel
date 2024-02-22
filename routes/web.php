@@ -20,7 +20,9 @@ use App\Http\Controllers\SettingController;
 |
 */
 
-Route::resource('admin/category', CategoryController::class);
+Route::resource('admin/category', CategoryController::class)->except([
+    'show'
+]);
 Route::resource('admin/profil', ProfilController::class)->except([
     'show'
 ]);

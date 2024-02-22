@@ -5,6 +5,8 @@
 @extends('layouts.master')
 
 @section('section12')
+    @include('partials.alert')
+
     <h2>Modifier {{ $profil->name }}</h2>
 
 
@@ -23,25 +25,26 @@
 
         <div class="form-group">
             <label for="email" class="form-label mt-4">Email</label>
-            <input type="email" placeholder="Entrez votre adresse e-mail" value="{{ old('email', $profil->email) }}" name="email"
-                class="form-control" id="inputEmail">
+            <input type="email" placeholder="Entrez votre adresse e-mail" value="{{ old('email', $profil->email) }}"
+                name="email" class="form-control" id="inputEmail">
             @error('email')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="role" class="form-label mt-4">Rôle</label>
-            <select name="role" class="form-control">
-                <option value="" disabled selected>Choisissez un rôle</option>
-                <option value="admin">Admin</option>
-                <option value="superAdmin">Super Admin</option>
-            </select>
-            @error('role')
-                <small class="text-danger">{{ $message }}</small>
-            @enderror
-        </div>
-
+        @can('viewAny', $profil)
+            <div class="form-group">
+                <label for="role" class="form-label mt-4">Rôle</label>
+                <select name="role" class="form-control">
+                    <option value="" disabled selected>Choisissez un rôle</option>
+                    <option value="admin">Admin</option>
+                    <option value="superAdmin">Super Admin</option>
+                </select>
+                @error('role')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        @endcan
 
         <div class="form-group">
             <label for="password" class="form-label mt-4">Mot de passe</label>

@@ -64,7 +64,7 @@ class ArticleController extends Controller
         // Insert the article
         Article::create($validatedData);
 
-        return redirect()->route('article.index')->with('success', 'The article "' . $validatedData['title'] . '" has been successfully added.');
+        return redirect()->route('articles.index')->with('success', 'The article "' . $validatedData['title'] . '" has been successfully added.');
     }
 
 
@@ -105,7 +105,7 @@ class ArticleController extends Controller
         //insertion
         $article->fill($formFields)->save();
 
-        return redirect()->route('article.index')->with('success', 'L\'article "' . $formFields['title'] . '" a bien été modifié.');
+        return redirect()->back()->with('success', 'L\'article "' . $formFields['title'] . '" a bien été modifié.');
     }
 
     /**
@@ -114,7 +114,7 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect()->route('article.index')->with('success', "L'article «" . $article->title . "» a bien été supprimé");
+        return redirect()->back()->with('success', "L'article «" . $article->title . "» a bien été supprimé");
     }
 
     // ArticlesController.php
@@ -138,6 +138,7 @@ class ArticleController extends Controller
         $latestArticles = DB::table('articles')
             ->join('profils', 'profils.id', '=', 'articles.profil_id')
             ->where('profils.id', '=', $adminConnected->id)
+            ->whereNull('articles.deleted_at')
             ->select('articles.*')
             ->orderBy('articles.created_at', 'desc')
             ->take(3)

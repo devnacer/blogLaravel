@@ -5,9 +5,8 @@
 @extends('layouts.master')
 
 @section('section12')
-    <h2>Tous mes articles</h2>
-
     @include('partials.alert')
+    <h2>Tous mes articles</h2>
 
     <div class="row d-flex justify-content-center">
 
@@ -65,5 +64,4 @@
     @if ($articles->hasPages())
         {{ $articles->links() }}
     @endif
-    
 @endsection

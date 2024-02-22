@@ -5,6 +5,8 @@
 @extends('layouts.master')
 
 @section('section12')
+    @include('partials.alert')
+
     <h2>Modifier la catégorie {{ $category->name }}</h2>
 
 

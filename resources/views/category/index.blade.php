@@ -5,9 +5,9 @@
 @extends('layouts.master')
 
 @section('section12')
+    @include('partials.alert')
     <h2>Mes Catégories</h2>
 
-    @include('partials.alert')
 
     <div class="row d-flex justify-content-center">
 
@@ -29,7 +29,7 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
 
-                        @can('viewAny', $category)
+                        @can('update', $category)
                             <td class="d-flex">
                                 <form action="{{ route('category.destroy', $category->id) }}" method="POST">
                                     @csrf

@@ -7,6 +7,8 @@
 @extends('layouts.master')
 
 @section('section12')
+    @include('partials.alert')
+
     <h2>Modification de l'article: <strong>{{ $article->title }}</strong></h2>
 
     <form action="{{ route('article.update', $article->id) }}" method="POST" enctype="multipart/form-data">

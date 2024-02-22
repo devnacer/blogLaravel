@@ -10,8 +10,6 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                
-
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('front.index') }}">Accueil</a>
                 </li>
@@ -34,7 +32,7 @@
                     </li>
 
                     {{-- profil --}}
-                    @can('view', App\Models\Profil::class)
+                    @can('viewAny', App\Models\Profil::class)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,7 +61,7 @@
                             Article
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @can('view', App\Models\Profil::class)
+                            @can('viewAny', App\Models\Profil::class)
                                 <li><a class="dropdown-item" href="{{ route('article.index') }}">Voir tous les articles</a></li>
                             @endcan
                             <li><a class="dropdown-item" href="{{ route('articles.index') }}">Voir mes articles</a></li>
@@ -87,10 +85,10 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route('category.index') }}">Voir toutes les catégories</a>
                             </li>
+                            @can('viewAny', App\Models\Profil::class)
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            @can('view', App\Models\Profil::class)
                                 <li><a class="dropdown-item" href="{{ route('category.create') }}">Ajouter une Catégorie</a>
                                 </li>
                             @endcan

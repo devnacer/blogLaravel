@@ -71,11 +71,19 @@ class ProfilController extends Controller
     {
         $this->authorize('update', $profil);
 
+        if($profil->role === 'standard' ){
+            $profil->role === 'standard';
+        }
+
+        if($profil->role === 'admin' ){
+            $profil->role === 'admin';
+        };
+        
         $formFields = $request->validated();
         $formFields['password'] = Hash::make($request->password);
         $profil->fill($formFields)->save();
 
-        return redirect()->route('profil.index')->with('success', "L'administrateur a bien été modifié");
+        return redirect()->back()->with('success', "L'administrateur a bien été modifié");
     }
 
     /**
@@ -84,6 +92,6 @@ class ProfilController extends Controller
     public function destroy(Profil $profil)
     {
         $profil->delete();
-        return redirect()->route('profil.index')->with('success', "L'administrateur " . $profil->name . ' a bien été supprimé.');
+        return redirect()->back()->with('success', "L'administrateur " . $profil->name . ' a bien été supprimé.');
     }
 }

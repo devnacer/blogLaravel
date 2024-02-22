@@ -5,9 +5,9 @@
 @extends('layouts.master')
 
 @section('section12')
+    @include('partials.alert')
     <h2>Tous les admins</h2>
 
-    @include('partials.alert')
 
     <div class="row d-flex justify-content-center">
 

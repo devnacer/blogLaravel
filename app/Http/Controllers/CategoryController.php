@@ -11,7 +11,10 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->authorizeResource(Category::class, 'category'); // Assuming 'category' is the resource key for Category model
+
     }
+    
     /**
      * Display a listing of the resource.
      */
@@ -46,10 +49,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
-    {
-        //
-    }
+    // public function show(Category $category)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -67,7 +70,7 @@ class CategoryController extends Controller
         $formFields = $request->validated();
         $category->fill($formFields)->save();
     
-        return redirect()->route('category.index')->with('success', 'La catégorie a bien été modifiée !');
+        return redirect()->back()->with('success', 'La catégorie a bien été modifiée !');
 
 
     }
@@ -78,7 +81,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('category.index')->with('success', 'La catégorie "'.$category->name.'" a bien été supprimée');
+        return redirect()->back()->with('success', 'La catégorie "'.$category->name.'" a bien été supprimée');
     }
     
 }
