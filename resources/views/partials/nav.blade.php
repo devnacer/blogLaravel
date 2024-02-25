@@ -39,7 +39,8 @@
                                 Admin
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{{ route('profil.index') }}">Voir tous les admins</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profil.indexAdmins') }}">Voir tous les admins</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profil.index') }}">Voir tous les membres</a></li>
 
                                 @can('create', App\Models\Profil::class)
                                     <li>

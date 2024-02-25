@@ -1,12 +1,12 @@
 @section('title33')
-    Tous les membres
+    Tous les admins
 @endsection
 
 @extends('layouts.master')
 
 @section('section12')
     @include('partials.alert')
-    <h2>Tous les membres</h2>
+    <h2>Tous les admins</h2>
 
 
     <div class="row d-flex justify-content-center">
@@ -50,7 +50,7 @@
                 @empty
                     <td>
                         <tr>
-                            Aucun membre trouvé.
+                            Aucun admin trouvé.
                         </tr>
                     </td>
                 @endforelse

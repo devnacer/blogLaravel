@@ -26,6 +26,7 @@ Route::resource('admin/category', CategoryController::class)->except([
 Route::resource('admin/profil', ProfilController::class)->except([
     'show'
 ]);
+Route::get('admin/profils-admins', [ProfilController::class, 'indexAdmins'])->name('profil.indexAdmins');
 Route::resource('admin/article', ArticleController::class);
 Route::get('admin/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
 Route::get('admin/home', [ArticleController::class, 'home'])->name('profil.home');

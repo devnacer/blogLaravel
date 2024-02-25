@@ -26,6 +26,16 @@ class ProfilController extends Controller
         return view('profil/index', compact('profils'));
     }
 
+    public function indexAdmins()
+    {
+        $profils = Profil::where('role', 'admin')
+        ->orWhere('role', 'superAdmin')
+        ->latest()
+        ->paginate(4);
+
+        return view('profil.indexAdmins', compact('profils'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -67,23 +77,46 @@ class ProfilController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProfilRequest $request, Profil $profil)
+    public function update(Request $request, Profil $profil)
     {
-        $this->authorize('update', $profil);
+        if($profil->role = 'standard' || $profil->role = 'admin'){
+            // Define validation rules
+            $rules = [
+                'name' => 'required|min:2|max:55',
+                'email' => 'required|email|unique:profils,email,' . $profil->id,
+                // 'role' => 'required|in:admin,superAdmin,standard',
+                'password' => 'nullable|min:3|confirmed',
+            ];
+    
+            // Validate the request
+            $formFields = $request->validate($rules);
+    
+            if ($profil->role === 'standard') {
+                $formFields['role'] = 'standard';
+            }
+    
+            if ($profil->role === 'admin') {
+                $formFields['role'] = 'admin';
+            };
 
-        if($profil->role === 'standard' ){
-            $profil->role === 'standard';
         }
-
-        if($profil->role === 'admin' ){
-            $profil->role === 'admin';
-        };
+        if($profil->role = 'superAdmin' || $profil->role = 'admin'){
+            // Define validation rules
+            $rules = [
+                'name' => 'required|min:2|max:55',
+                'email' => 'required|email|unique:profils,email,' . $profil->id,
+                'role' => 'required|in:admin,superAdmin,standard',
+                'password' => 'nullable|min:3|confirmed',
+            ];
+    
+            // Validate the request
+            $formFields = $request->validate($rules);
+        }
         
-        $formFields = $request->validated();
         $formFields['password'] = Hash::make($request->password);
         $profil->fill($formFields)->save();
 
-        return redirect()->back()->with('success', "L'administrateur a bien été modifié");
+        return redirect()->back()->with('success', "La modification a été bien été réussie");
     }
 
     /**
