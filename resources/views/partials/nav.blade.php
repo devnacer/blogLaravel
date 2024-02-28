@@ -104,7 +104,7 @@
                             {{ Auth::user()->email }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('setting.show', Auth::user()->id) }}">Paramètre</a>
+                            <li><a class="dropdown-item" href="{{ route('setting.edit', Auth::user()->id) }}">Paramètre</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">

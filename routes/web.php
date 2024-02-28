@@ -31,7 +31,9 @@ Route::resource('admin/article', ArticleController::class);
 Route::get('admin/articles', [ArticleController::class, 'indexArticlesProfil'])->name('articles.index');
 Route::get('admin/home', [ArticleController::class, 'home'])->name('profil.home');
 
-Route::get('admin/setting/{profil}', [SettingController::class, 'show'])->name('setting.show');
+//setting
+Route::get('admin/setting/{profil}', [SettingController::class, 'edit'])->name('setting.edit');
+Route::put('admin/setting/{profil}', [SettingController::class, 'update'])->name('setting.update');
 Route::delete('admin/setting/{profil}', [SettingController::class, 'destroy'])->name('setting.destroy');
 
 // login
