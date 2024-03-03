@@ -16,7 +16,7 @@
 
         <br>
 
-        <h3>Statistiques pour ce blog</h3>
+        <h3>Statistiques de ce blog</h3>
 
         <ul class="list-group mt-4">
             <li class="list-group-item d-flex justify-content-between align-items-center">

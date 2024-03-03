@@ -22,12 +22,10 @@ class SettingController extends Controller
 
     public function update(Profil $profil, Request $request)
     {
-
-
         // Define validation rules
         $rules = [
             'name' => 'required|min:2|max:55',
-            'email' => 'required|email|unique:profils,email,' . $profil->id,
+            'email' => 'required|email',
             'password' => 'required|min:3|confirmed',
         ];
 

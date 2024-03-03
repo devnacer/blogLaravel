@@ -83,18 +83,23 @@
     <div class="card my-3">
 
         <div class="card-header">
-            Information
+            Suppression de Compte
         </div>
+        
         <div class="card-body">
-
+        
             <form action="{{ route('setting.destroy', $profil->id) }}" method="POST">
                 @csrf
                 @method('delete')
-                <p class="form-label mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In sit tenetur, rerum blanditiis, cum perspiciatis, amet esse vitae explicabo officiis dolore facilis? Autem possimus corporis quas non mollitia perferendis quos.</p>
-                <button onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?');"
-                    class="btn btn-danger mt-4 mb-4">Supprimer mon profil</button>
+                
+                <p class="form-label mt-4">Si vous choisissez de supprimer votre compte, toutes vos données seront définitivement effacées. Cette action est irréversible, êtes-vous sûr de vouloir continuer ?</p>
+                
+                <button onclick="return confirm('Voulez-vous vraiment supprimer votre compte ?');" class="btn btn-danger mt-4 mb-4">Supprimer mon profil</button>
+            
             </form>
+        
         </div>
-
+    
     </div>
+    
 @endsection
